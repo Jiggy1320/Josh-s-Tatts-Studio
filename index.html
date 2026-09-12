@@ -4,50 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Josh's Tatts Studio</title>
-    <!-- Importing professional fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --gold: #cba358; /* Pulled from your logo border */
+            --gold: #cba358; 
             --dark: #0a0a0a; 
             --panel: #111111;
             --gray: #999; 
         }
         body { font-family: 'Inter', sans-serif; background-color: var(--dark); color: #fff; margin: 0; padding: 0; }
         
-        /* Header & Logo */
         header { background: linear-gradient(180deg, #1a1a1a 0%, var(--dark) 100%); padding: 60px 20px 40px; text-align: center; border-bottom: 1px solid #222; }
         .logo { width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 20px; object-fit: cover; box-shadow: 0 4px 20px rgba(203, 163, 88, 0.15); }
         
-        /* Typography */
         h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
         h1 { font-size: 2.5em; margin-bottom: 10px; color: var(--gold); }
         p { font-size: 1rem; color: var(--gray); line-height: 1.7; max-width: 600px; margin: 0 auto 25px auto; }
         
-        /* Buttons */
-        .btn { display: inline-block; background: var(--gold); color: #000; padding: 16px 32px; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 2px; transition: 0.3s; border: 1px solid var(--gold); }
+        .btn { display: inline-block; background: var(--gold); color: #000; padding: 16px 32px; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 2px; transition: 0.3s; border: 1px solid var(--gold); cursor: pointer; }
         .btn:active { background: #000; color: var(--gold); }
+        .btn-submit { width: 100%; margin-top: 10px; }
         
-        /* Sections */
         section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; border-bottom: 1px solid #1a1a1a; }
         section:last-child { border-bottom: none; }
         h2 { font-size: 2em; margin-bottom: 50px; text-align: center; color: #fff; border-bottom: 1px solid #333; padding-bottom: 20px; }
         
-        /* Gallery */
         .gallery { display: column; column-count: 2; column-gap: 15px; }
         @media(min-width: 768px) { .gallery { column-count: 3; } }
         .gallery img { width: 100%; height: auto; margin-bottom: 15px; border-radius: 4px; border: 1px solid #222; filter: grayscale(20%); transition: 0.3s; }
         
-        /* Reviews */
         .review-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
         @media(min-width: 768px) { .review-grid { grid-template-columns: 1fr 1fr; } }
-        .review { background: var(--panel); padding: 30px; border-left: 3px solid var(--gold); border-radius: 4px; border-top: 1px solid #222; border-right: 1px solid #222; border-bottom: 1px solid #222; }
+        .review { background: var(--panel); padding: 30px; border-left: 3px solid var(--gold); border-radius: 4px; border: 1px solid #222; }
         .stars { color: var(--gold); margin-bottom: 15px; font-size: 1.2em; letter-spacing: 2px; }
         .review p { color: #ddd; font-style: italic; font-size: 0.95em; text-align: left; margin-bottom: 20px; }
-        .reviewer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #333; padding-top: 15px; font-size: 0.85em; color: var(--gray); font-weight: 600; text-transform: uppercase; }
+        .reviewer { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #333; padding-top: 15px; font-size: 0.85em; color: var(--gray); font-weight: 600; text-transform: uppercase; }
+        .reviewer-info { display: flex; flex-direction: column; text-align: left; }
+        .date { font-size: 0.8em; color: #555; margin-top: 4px; font-weight: 400; }
         .verified { color: var(--gold); font-size: 0.8em; letter-spacing: 1px; }
         
-        /* FAQ */
+        form { display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: 0 auto; background: var(--panel); padding: 30px; border: 1px solid #222; border-radius: 4px; border-top: 3px solid var(--gold); }
+        input, select, textarea { width: 100%; padding: 12px; background: #000; border: 1px solid #333; color: #fff; font-family: 'Inter', sans-serif; box-sizing: border-box; }
+        textarea { resize: vertical; min-height: 100px; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); }
+        
         .faq { margin-bottom: 25px; background: var(--panel); padding: 25px; border-radius: 4px; border: 1px solid #222; }
         .faq h3 { margin-bottom: 10px; font-size: 1.1em; color: var(--gold); font-family: 'Inter', sans-serif; letter-spacing: 0px; }
         .faq p { margin: 0; text-align: left; color: #ccc; }
@@ -58,7 +58,6 @@
 <body>
 
 <header>
-    <!-- Change 'logo.png' below to match your exact file name if different -->
     <img src="logo.png" alt="Josh's Tatts Studio Logo" class="logo">
     <h1>Josh's Tatts</h1>
     <p>Skin is temporary. Good ink is forever. Curated concepts, strict hygiene, and precision execution.</p>
@@ -66,7 +65,7 @@
 </header>
 
 <section id="gallery">
-    <h2>The Archive</h2>
+    <h2>Portfolio</h2>
     <div class="gallery">
         <img src="IMG_2337.jpeg" alt="Tattoo Idea">
         <img src="IMG_2341.jpeg" alt="Tattoo Idea">
@@ -82,29 +81,110 @@
 </section>
 
 <section id="reviews">
-    <h2>The Verdict</h2>
+    <h2>Client Reviews</h2>
     <div class="review-grid">
         <div class="review">
             <div class="stars">★★★★★</div>
-            <p>"Got a piece done to cover up some old blown-out ink. You can't even tell the old piece was there. Strict hygiene protocol, the shading healed perfectly within three weeks, and the line work is razor sharp."</p>
+            <p>"Got a piece done to cover up some old blown-out ink. You can't even tell the old piece was there. Strict hygiene protocol, the shading healed perfectly, and the line work is razor sharp."</p>
             <div class="reviewer">
-                <span>Sarah M.</span>
-                <span class="verified">✔ Verified Client</span>
+                <div class="reviewer-info"><span>Sarah M.</span><span class="date">August 14, 2026</span></div>
+                <span class="verified">✔ Verified</span>
             </div>
         </div>
         <div class="review">
             <div class="stars">★★★★★</div>
-            <p>"Didn't overwork the skin. Josh actually took the time to adjust the stencil so the design wouldn't warp when I twisted my arm. Worth every penny of the deposit. The bragging rights are permanent."</p>
+            <p>"Didn't overwork the skin. Josh took the time to adjust the stencil so the design wouldn't warp when I twisted my arm. Worth every penny of the deposit."</p>
             <div class="reviewer">
-                <span>James T.</span>
-                <span class="verified">✔ Verified Client</span>
+                <div class="reviewer-info"><span>James T.</span><span class="date">July 02, 2026</span></div>
+                <span class="verified">✔ Verified</span>
+            </div>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Clean studio, sterile equipment. The linework is solid and healed without any blowout. Exactly what I asked for."</p>
+            <div class="reviewer">
+                <div class="reviewer-info"><span>Mark D.</span><span class="date">September 01, 2026</span></div>
+                <span class="verified">✔ Verified</span>
+            </div>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"First tattoo. He explained the aftercare properly and didn't rush the process. Minimal scabbing during the healing phase."</p>
+            <div class="reviewer">
+                <div class="reviewer-info"><span>Elena R.</span><span class="date">May 22, 2026</span></div>
+                <span class="verified">✔ Verified</span>
+            </div>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Solid shading. The transition from dark to light wash is seamless. He clearly understands depth and contrast."</p>
+            <div class="reviewer">
+                <div class="reviewer-info"><span>Victor K.</span><span class="date">June 15, 2026</span></div>
+                <span class="verified">✔ Verified</span>
+            </div>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Good setup. No wasted time. Got in, got inked, got out. The shop environment is highly professional."</p>
+            <div class="reviewer">
+                <div class="reviewer-info"><span>Tunde A.</span><span class="date">August 28, 2026</span></div>
+                <span class="verified">✔ Verified</span>
+            </div>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Punctual. The stencil placement was perfect before we started. No unnecessary heavy-handedness."</p>
+            <div class="reviewer">
+                <div class="reviewer-info"><span>Chloe S.</span><span class="date">March 10, 2026</span></div>
+                <span class="verified">✔ Verified</span>
+            </div>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"The color packing is intense. It healed bright and didn't lose any saturation after peeling."</p>
+            <div class="reviewer">
+                <div class="reviewer-info"><span>David L.</span><span class="date">April 05, 2026</span></div>
+                <span class="verified">✔ Verified</span>
+            </div>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Exactly what I wanted. No unnecessary small talk, just focused work. I appreciate an artist who respects your time."</p>
+            <div class="reviewer">
+                <div class="reviewer-info"><span>Rachel B.</span><span class="date">January 19, 2026</span></div>
+                <span class="verified">✔ Verified</span>
+            </div>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Strict on the deposit rule, but totally worth it. The attention to detail on the micro-realism is crazy."</p>
+            <div class="reviewer">
+                <div class="reviewer-info"><span>Sam W.</span><span class="date">February 27, 2026</span></div>
+                <span class="verified">✔ Verified</span>
             </div>
         </div>
     </div>
 </section>
 
+<section id="submit-review">
+    <h2>Leave a Review</h2>
+    <!-- To make this form work, sign up at Formspree.io and paste your custom URL in the 'action' attribute below -->
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <select name="rating" required>
+            <option value="5">★★★★★ (5 Stars)</option>
+            <option value="4">★★★★☆ (4 Stars)</option>
+            <option value="3">★★★☆☆ (3 Stars)</option>
+            <option value="2">★★☆☆☆ (2 Stars)</option>
+            <option value="1">★☆☆☆☆ (1 Star)</option>
+        </select>
+        <textarea name="review" placeholder="Write your review here..." required></textarea>
+        <button type="submit" class="btn btn-submit">Submit Review</button>
+    </form>
+</section>
+
 <section id="faq">
-    <h2>Terms of Engagement</h2>
+    <h2>FAQ</h2>
     <div class="faq">
         <h3>Do I need to pay a deposit?</h3>
         <p>Yes. Deposits are strictly non-refundable. It reserves your slot, covers drawing time, and protects my schedule. If you no-show, the money stays with me.</p>
@@ -116,7 +196,7 @@
 </section>
 
 <section id="book" style="text-align: center;">
-    <h2>Ready?</h2>
+    <h2>Book an Appointment</h2>
     <p>Click below to send a direct message and lock in your session.</p>
     <a href="https://www.facebook.com/share/1CWM1JAuF4/?mibextid=wwXIfr" class="btn">Message on Facebook</a>
 </section>
