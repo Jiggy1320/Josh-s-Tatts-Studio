@@ -1,41 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Josh's Tatts Studio in Brighton, UK offers custom tattoos, cover-ups, sleeves, black & grey, and micro-realism. Strict hygiene, professional artists, permanent ink.">
-    <meta name="keywords" content="tattoo studio Brighton, custom tattoos, black and grey tattoo, tattoo artist Brighton, sleeve tattoos, micro-realism tattoo UK">
-    <meta name="author" content="Josh's Tatts">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph / Social Media Tags -->
-    <meta property="og:title" content="Josh's Tatts Studio | Brighton, UK">
-    <meta property="og:description" content="Skin is temporary. Good ink is forever. Curated concepts, strict hygiene, and precision execution at Josh's Tatts Studio in Brighton.">
-    <meta property="og:image" content="https://example.com/Logo.JPG"> <!-- Note: Update URL in production -->
-    <meta property="og:url" content="https://example.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_GB">
-
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TattooParlor",
-      "name": "Josh's Tatts Studio",
-      "description": "Premium tattoo studio in Brighton, UK specializing in custom concepts, black and grey, and full sleeves. Strict hygiene and precision execution.",
-      "image": "https://example.com/Logo.JPG",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Brighton",
-        "addressCountry": "UK"
-      },
-      "telephone": "",
-      "url": "https://example.com/"
-    }
-    </script>
-
     <title>Josh's Tatts Studio | Brighton, UK</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -72,10 +39,17 @@
         .filter-btn { background: #222; color: #fff; border: 1px solid #333; padding: 10px 20px; border-radius: 30px; font-family: 'Inter', sans-serif; font-size: 0.9em; white-space: nowrap; cursor: pointer; transition: 0.3s; }
         .filter-btn.active, .filter-btn:active { background: var(--gold); color: #000; border-color: var(--gold); }
         
-        /* Gallery */
+        /* Gallery & Lightbox */
         .gallery { display: column; column-count: 2; column-gap: 15px; }
         @media(min-width: 768px) { .gallery { column-count: 3; } }
-        .gallery img { width: 100%; height: auto; margin-bottom: 15px; border-radius: 4px; border: 1px solid #222; filter: grayscale(20%); transition: 0.3s; }
+        .gallery img { width: 100%; height: auto; margin-bottom: 15px; border-radius: 4px; border: 1px solid #222; filter: grayscale(20%); transition: 0.3s; cursor: pointer; }
+        .gallery img:hover { filter: grayscale(0%); opacity: 0.9; }
+
+        /* Lightbox Modal CSS */
+        #lightbox-modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
+        #lightbox-modal img { max-width: 90%; max-height: 90vh; border-radius: 4px; border: 1px solid var(--gold); box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+        #lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; font-family: sans-serif; }
+        #lightbox-close:hover { color: var(--gold); }
         
         /* Reviews */
         .review-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
@@ -154,6 +128,12 @@
         <img src="Sleeve8.JPG" alt="Tattoo Idea" data-category="full-sleeve">
     </div>
 </section>
+
+<!-- Lightbox Modal Container -->
+<div id="lightbox-modal" onclick="closeLightbox()">
+    <span id="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Zoomed Tattoo">
+</div>
 
 <section id="reviews">
     <h2>Client Reviews</h2>
@@ -331,6 +311,22 @@
                 }
             }
         }
+    }
+
+    // Lightbox Logic
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const galleryImages = document.querySelectorAll('#portfolio-grid img');
+
+    galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxModal.style.display = 'flex';
+            lightboxImg.src = img.src;
+        });
+    });
+
+    function closeLightbox() {
+        lightboxModal.style.display = 'none';
     }
 </script>
 
