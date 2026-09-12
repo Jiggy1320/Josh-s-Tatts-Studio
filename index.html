@@ -14,7 +14,9 @@
         }
         body { font-family: 'Inter', sans-serif; background-color: var(--dark); color: #fff; margin: 0; padding: 0; }
         
-        header { background: linear-gradient(180deg, #1a1a1a 0%, var(--dark) 100%); padding: 60px 20px 40px; text-align: center; border-bottom: 1px solid #222; }
+        /* Header & Slideshow */
+        header { position: relative; padding: 80px 20px 60px; text-align: center; border-bottom: 1px solid #222; overflow: hidden; z-index: 1; }
+        .slideshow-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-size: cover; background-position: center; opacity: 0.2; transition: background-image 1s ease-in-out; }
         .logo { width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 15px; object-fit: cover; box-shadow: 0 4px 20px rgba(203, 163, 88, 0.15); }
         .location { color: var(--gold); font-size: 0.9em; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
         
@@ -22,8 +24,9 @@
         h1 { font-size: 2.5em; margin-bottom: 10px; color: #fff; }
         p { font-size: 1rem; color: var(--gray); line-height: 1.7; max-width: 600px; margin: 0 auto 25px auto; }
         
-        .btn { display: inline-block; background: var(--gold); color: #000; padding: 16px 32px; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 2px; transition: 0.3s; border: 1px solid var(--gold); cursor: pointer; }
+        .btn { display: inline-block; background: var(--gold); color: #000; padding: 16px 32px; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 2px; transition: 0.3s; border: 1px solid var(--gold); cursor: pointer; text-align: center; }
         .btn:active { background: #000; color: var(--gold); }
+        .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); display: block; width: max-content; margin: 30px auto 0; }
         .btn-submit { width: 100%; margin-top: 10px; }
         
         section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; border-bottom: 1px solid #1a1a1a; }
@@ -41,9 +44,11 @@
         @media(min-width: 768px) { .gallery { column-count: 3; } }
         .gallery img { width: 100%; height: auto; margin-bottom: 15px; border-radius: 4px; border: 1px solid #222; filter: grayscale(20%); transition: 0.3s; }
         
+        /* Reviews */
         .review-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
         @media(min-width: 768px) { .review-grid { grid-template-columns: 1fr 1fr; } }
         .review { background: var(--panel); padding: 30px; border-left: 3px solid var(--gold); border-radius: 4px; border: 1px solid #222; }
+        .review.hidden { display: none; } /* Hides extra reviews initially */
         .stars { color: var(--gold); margin-bottom: 15px; font-size: 1.2em; letter-spacing: 2px; }
         .review p { color: #ddd; font-style: italic; font-size: 0.95em; text-align: left; margin-bottom: 20px; }
         .reviewer { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #333; padding-top: 15px; font-size: 0.85em; color: var(--gray); font-weight: 600; text-transform: uppercase; }
@@ -66,7 +71,8 @@
 <body>
 
 <header>
-    <img src="logo.png" alt="Josh's Tatts Studio Logo" class="logo">
+    <div class="slideshow-bg" id="header-bg"></div>
+    <img src="logo.png" alt="Josh's Tatts Studio Logo" class="logo" onerror="this.src='https://via.placeholder.com/140?text=Logo'">
     <div class="location">📍 Brighton, UK</div>
     <h1>Josh's Tatts</h1>
     <p>Skin is temporary. Good ink is forever. Curated concepts, strict hygiene, and precision execution.</p>
@@ -89,7 +95,6 @@
     </div>
 
     <div class="gallery" id="portfolio-grid">
-        <!-- Notice the data-category attribute. This tells the script which filter this image belongs to. -->
         <img src="IMG_2337.jpeg" alt="Tattoo Idea" data-category="full-sleeve">
         <img src="IMG_2341.jpeg" alt="Tattoo Idea" data-category="black-and-grey">
         <img src="IMG_2343.jpeg" alt="Tattoo Idea" data-category="dark-tattoo">
@@ -105,10 +110,11 @@
 
 <section id="reviews">
     <h2>Client Reviews</h2>
-    <div class="review-grid">
+    <div class="review-grid" id="review-container">
+        <!-- Visible Reviews -->
         <div class="review">
             <div class="stars">★★★★★</div>
-            <p>"Got a piece done to cover up some old blown-out ink. You can't even tell the old piece was there. Strict hygiene protocol, the shading healed perfectly, and the line work is razor sharp."</p>
+            <p>"Got a piece done to cover up some old blown-out ink. You can't even tell the old piece was there. Strict hygiene protocol and the shading healed perfectly."</p>
             <div class="reviewer">
                 <div class="reviewer-info"><span>Sarah M.</span><span class="date">August 14, 2026</span></div>
                 <span class="verified">✔ Verified</span>
@@ -116,25 +122,25 @@
         </div>
         <div class="review">
             <div class="stars">★★★★☆</div>
-            <p>"Studio was a little hard to find in Brighton, but the setup is solid. The linework is clean and healed without any blowout."</p>
+            <p>"Studio was a little hard to find, but the setup is solid. The linework is clean and healed without any blowout."</p>
             <div class="reviewer">
                 <div class="reviewer-info"><span>James T.</span><span class="date">July 02, 2026</span></div>
                 <span class="verified">✔ Verified</span>
             </div>
         </div>
         <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"Didn't overwork the skin. Josh took the time to adjust the stencil so the design wouldn't warp when I twisted my arm. Worth every penny of the deposit."</p>
+            <div class="stars">★★★★☆</div>
+            <p>"Music was a bit loud for me, but the stencil placement was perfect before we started. No unnecessary heavy-handedness."</p>
             <div class="reviewer">
-                <div class="reviewer-info"><span>Mark D.</span><span class="date">September 01, 2026</span></div>
+                <div class="reviewer-info"><span>Chloe S.</span><span class="date">September 01, 2026</span></div>
                 <span class="verified">✔ Verified</span>
             </div>
         </div>
         <div class="review">
             <div class="stars">★★★★★</div>
-            <p>"First tattoo. He explained the aftercare properly and didn't rush the process. Minimal scabbing during the healing phase."</p>
+            <p>"Didn't overwork the skin. Josh took the time to adjust the stencil so the design wouldn't warp when I twisted my arm."</p>
             <div class="reviewer">
-                <div class="reviewer-info"><span>Elena R.</span><span class="date">May 22, 2026</span></div>
+                <div class="reviewer-info"><span>Mark D.</span><span class="date">May 22, 2026</span></div>
                 <span class="verified">✔ Verified</span>
             </div>
         </div>
@@ -146,23 +152,25 @@
                 <span class="verified">✔ Verified</span>
             </div>
         </div>
-        <div class="review">
-            <div class="stars">★★★★★</div>
+
+        <!-- Hidden Reviews (Revealed when button is clicked) -->
+        <div class="review hidden">
+            <div class="stars">★★★★☆</div>
+            <p>"First tattoo. He explained the aftercare properly and didn't rush the process. Minimal scabbing during the healing phase."</p>
+            <div class="reviewer">
+                <div class="reviewer-info"><span>Elena R.</span><span class="date">August 28, 2026</span></div>
+                <span class="verified">✔ Verified</span>
+            </div>
+        </div>
+        <div class="review hidden">
+            <div class="stars">★★★★☆</div>
             <p>"Good setup. No wasted time. Got in, got inked, got out. The shop environment is highly professional."</p>
             <div class="reviewer">
-                <div class="reviewer-info"><span>Tunde A.</span><span class="date">August 28, 2026</span></div>
+                <div class="reviewer-info"><span>Tunde A.</span><span class="date">March 10, 2026</span></div>
                 <span class="verified">✔ Verified</span>
             </div>
         </div>
-        <div class="review">
-            <div class="stars">★★★★☆</div>
-            <p>"Music was a bit loud for me, but the stencil placement was perfect before we started. No unnecessary heavy-handedness."</p>
-            <div class="reviewer">
-                <div class="reviewer-info"><span>Chloe S.</span><span class="date">March 10, 2026</span></div>
-                <span class="verified">✔ Verified</span>
-            </div>
-        </div>
-        <div class="review">
+        <div class="review hidden">
             <div class="stars">★★★★★</div>
             <p>"The color packing is intense. It healed bright and didn't lose any saturation after peeling."</p>
             <div class="reviewer">
@@ -170,16 +178,16 @@
                 <span class="verified">✔ Verified</span>
             </div>
         </div>
-        <div class="review">
-            <div class="stars">★★★★★</div>
+        <div class="review hidden">
+            <div class="stars">★★★★☆</div>
             <p>"Exactly what I wanted. No unnecessary small talk, just focused work. I appreciate an artist who respects your time."</p>
             <div class="reviewer">
                 <div class="reviewer-info"><span>Rachel B.</span><span class="date">January 19, 2026</span></div>
                 <span class="verified">✔ Verified</span>
             </div>
         </div>
-        <div class="review">
-            <div class="stars">★★★★★</div>
+        <div class="review hidden">
+            <div class="stars">★★★★☆</div>
             <p>"Strict on the deposit rule, but totally worth it. The attention to detail on the micro-realism is crazy."</p>
             <div class="reviewer">
                 <div class="reviewer-info"><span>Sam W.</span><span class="date">February 27, 2026</span></div>
@@ -187,6 +195,8 @@
             </div>
         </div>
     </div>
+    
+    <button class="btn btn-outline" id="load-more-btn" onclick="showAllReviews()">Read More Reviews</button>
 </section>
 
 <section id="submit-review">
@@ -228,29 +238,55 @@
 </footer>
 
 <script>
-    // This script controls the gallery filters
-    function filterSelection(c) {
-        var x, i;
-        x = document.getElementById("portfolio-grid").getElementsByTagName("img");
+    // 1. Slideshow Logic for the Header
+    const slideImages = [
+        "IMG_2337.jpeg", 
+        "IMG_2341.jpeg", 
+        "IMG_2393.jpeg", 
+        "IMG_2398.jpeg"
+    ];
+    let currentSlide = 0;
+    const headerBg = document.getElementById('header-bg');
+    
+    // Set the first image immediately
+    headerBg.style.backgroundImage = `url(${slideImages[0]})`;
+    
+    // Change image every 4 seconds
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % slideImages.length;
+        headerBg.style.backgroundImage = `url(${slideImages[currentSlide]})`;
+    }, 4000);
+
+    // 2. Load More Reviews Logic
+    function showAllReviews() {
+        const hiddenReviews = document.querySelectorAll('.review.hidden');
+        hiddenReviews.forEach(review => {
+            review.classList.remove('hidden');
+        });
+        // Hide the button after expanding
+        document.getElementById('load-more-btn').style.display = 'none';
+    }
+
+    // 3. Gallery Filter Logic
+    function filterSelection(category) {
+        let items = document.getElementById("portfolio-grid").getElementsByTagName("img");
+        let btns = document.getElementsByClassName("filter-btn");
         
-        // Update active button styling
-        var btns = document.getElementsByClassName("filter-btn");
-        for (i = 0; i < btns.length; i++) {
+        for (let i = 0; i < btns.length; i++) {
             btns[i].classList.remove("active");
-            if(btns[i].getAttribute("onclick").includes(c)) {
+            if(btns[i].getAttribute("onclick").includes(category)) {
                 btns[i].classList.add("active");
             }
         }
 
-        // Show/hide images based on category
-        for (i = 0; i < x.length; i++) {
-            if (c == "all") {
-                x[i].style.display = "block";
+        for (let i = 0; i < items.length; i++) {
+            if (category === "all") {
+                items[i].style.display = "block";
             } else {
-                if (x[i].getAttribute("data-category") == c) {
-                    x[i].style.display = "block";
+                if (items[i].getAttribute("data-category") === category) {
+                    items[i].style.display = "block";
                 } else {
-                    x[i].style.display = "none";
+                    items[i].style.display = "none";
                 }
             }
         }
