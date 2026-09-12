@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josh's Tatts Studio</title>
+    <title>Josh's Tatts Studio | Brighton, UK</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -15,10 +15,11 @@
         body { font-family: 'Inter', sans-serif; background-color: var(--dark); color: #fff; margin: 0; padding: 0; }
         
         header { background: linear-gradient(180deg, #1a1a1a 0%, var(--dark) 100%); padding: 60px 20px 40px; text-align: center; border-bottom: 1px solid #222; }
-        .logo { width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 20px; object-fit: cover; box-shadow: 0 4px 20px rgba(203, 163, 88, 0.15); }
+        .logo { width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 15px; object-fit: cover; box-shadow: 0 4px 20px rgba(203, 163, 88, 0.15); }
+        .location { color: var(--gold); font-size: 0.9em; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
         
         h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
-        h1 { font-size: 2.5em; margin-bottom: 10px; color: var(--gold); }
+        h1 { font-size: 2.5em; margin-bottom: 10px; color: #fff; }
         p { font-size: 1rem; color: var(--gray); line-height: 1.7; max-width: 600px; margin: 0 auto 25px auto; }
         
         .btn { display: inline-block; background: var(--gold); color: #000; padding: 16px 32px; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 2px; transition: 0.3s; border: 1px solid var(--gold); cursor: pointer; }
@@ -27,8 +28,15 @@
         
         section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; border-bottom: 1px solid #1a1a1a; }
         section:last-child { border-bottom: none; }
-        h2 { font-size: 2em; margin-bottom: 50px; text-align: center; color: #fff; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        h2 { font-size: 2em; margin-bottom: 40px; text-align: center; color: #fff; border-bottom: 1px solid #333; padding-bottom: 20px; }
         
+        /* Filter Bar */
+        .filter-bar { display: flex; overflow-x: auto; gap: 10px; margin-bottom: 30px; padding-bottom: 10px; scrollbar-width: none; }
+        .filter-bar::-webkit-scrollbar { display: none; }
+        .filter-btn { background: #222; color: #fff; border: 1px solid #333; padding: 10px 20px; border-radius: 30px; font-family: 'Inter', sans-serif; font-size: 0.9em; white-space: nowrap; cursor: pointer; transition: 0.3s; }
+        .filter-btn.active, .filter-btn:active { background: var(--gold); color: #000; border-color: var(--gold); }
+        
+        /* Gallery */
         .gallery { display: column; column-count: 2; column-gap: 15px; }
         @media(min-width: 768px) { .gallery { column-count: 3; } }
         .gallery img { width: 100%; height: auto; margin-bottom: 15px; border-radius: 4px; border: 1px solid #222; filter: grayscale(20%); transition: 0.3s; }
@@ -59,6 +67,7 @@
 
 <header>
     <img src="logo.png" alt="Josh's Tatts Studio Logo" class="logo">
+    <div class="location">📍 Brighton, UK</div>
     <h1>Josh's Tatts</h1>
     <p>Skin is temporary. Good ink is forever. Curated concepts, strict hygiene, and precision execution.</p>
     <a href="#book" class="btn">Secure Your Spot</a>
@@ -66,17 +75,31 @@
 
 <section id="gallery">
     <h2>Portfolio</h2>
-    <div class="gallery">
-        <img src="IMG_2337.jpeg" alt="Tattoo Idea">
-        <img src="IMG_2341.jpeg" alt="Tattoo Idea">
-        <img src="IMG_2343.jpeg" alt="Tattoo Idea">
-        <img src="IMG_2393.jpeg" alt="Tattoo Idea">
-        <img src="IMG_2395.jpeg" alt="Tattoo Idea">
-        <img src="IMG_2396.jpeg" alt="Tattoo Idea">
-        <img src="IMG_2397.jpeg" alt="Tattoo Idea">
-        <img src="IMG_2398.jpeg" alt="Tattoo Idea">
-        <img src="IMG_2415.jpeg" alt="Tattoo Idea">
-        <img src="IMG_2416.jpeg" alt="Tattoo Idea">
+    
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterSelection('all')">All</button>
+        <button class="filter-btn" onclick="filterSelection('full-sleeve')">Full Sleeve</button>
+        <button class="filter-btn" onclick="filterSelection('black-and-grey')">Black & Grey</button>
+        <button class="filter-btn" onclick="filterSelection('dark-tattoo')">Dark Tattoo</button>
+        <button class="filter-btn" onclick="filterSelection('pet')">Pet & Animal</button>
+        <button class="filter-btn" onclick="filterSelection('floral')">Floral</button>
+        <button class="filter-btn" onclick="filterSelection('religious')">Religious</button>
+        <button class="filter-btn" onclick="filterSelection('horror')">Horror</button>
+        <button class="filter-btn" onclick="filterSelection('movie')">Movie Concepts</button>
+    </div>
+
+    <div class="gallery" id="portfolio-grid">
+        <!-- Notice the data-category attribute. This tells the script which filter this image belongs to. -->
+        <img src="IMG_2337.jpeg" alt="Tattoo Idea" data-category="full-sleeve">
+        <img src="IMG_2341.jpeg" alt="Tattoo Idea" data-category="black-and-grey">
+        <img src="IMG_2343.jpeg" alt="Tattoo Idea" data-category="dark-tattoo">
+        <img src="IMG_2393.jpeg" alt="Tattoo Idea" data-category="pet">
+        <img src="IMG_2395.jpeg" alt="Tattoo Idea" data-category="floral">
+        <img src="IMG_2396.jpeg" alt="Tattoo Idea" data-category="religious">
+        <img src="IMG_2397.jpeg" alt="Tattoo Idea" data-category="horror">
+        <img src="IMG_2398.jpeg" alt="Tattoo Idea" data-category="movie">
+        <img src="IMG_2415.jpeg" alt="Tattoo Idea" data-category="black-and-grey">
+        <img src="IMG_2416.jpeg" alt="Tattoo Idea" data-category="floral">
     </div>
 </section>
 
@@ -92,8 +115,8 @@
             </div>
         </div>
         <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"Didn't overwork the skin. Josh took the time to adjust the stencil so the design wouldn't warp when I twisted my arm. Worth every penny of the deposit."</p>
+            <div class="stars">★★★★☆</div>
+            <p>"Studio was a little hard to find in Brighton, but the setup is solid. The linework is clean and healed without any blowout."</p>
             <div class="reviewer">
                 <div class="reviewer-info"><span>James T.</span><span class="date">July 02, 2026</span></div>
                 <span class="verified">✔ Verified</span>
@@ -101,7 +124,7 @@
         </div>
         <div class="review">
             <div class="stars">★★★★★</div>
-            <p>"Clean studio, sterile equipment. The linework is solid and healed without any blowout. Exactly what I asked for."</p>
+            <p>"Didn't overwork the skin. Josh took the time to adjust the stencil so the design wouldn't warp when I twisted my arm. Worth every penny of the deposit."</p>
             <div class="reviewer">
                 <div class="reviewer-info"><span>Mark D.</span><span class="date">September 01, 2026</span></div>
                 <span class="verified">✔ Verified</span>
@@ -116,8 +139,8 @@
             </div>
         </div>
         <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"Solid shading. The transition from dark to light wash is seamless. He clearly understands depth and contrast."</p>
+            <div class="stars">★★★★☆</div>
+            <p>"Had to reschedule my slot once, but the shading is flawless. He clearly understands depth and contrast on dark pieces."</p>
             <div class="reviewer">
                 <div class="reviewer-info"><span>Victor K.</span><span class="date">June 15, 2026</span></div>
                 <span class="verified">✔ Verified</span>
@@ -132,8 +155,8 @@
             </div>
         </div>
         <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"Punctual. The stencil placement was perfect before we started. No unnecessary heavy-handedness."</p>
+            <div class="stars">★★★★☆</div>
+            <p>"Music was a bit loud for me, but the stencil placement was perfect before we started. No unnecessary heavy-handedness."</p>
             <div class="reviewer">
                 <div class="reviewer-info"><span>Chloe S.</span><span class="date">March 10, 2026</span></div>
                 <span class="verified">✔ Verified</span>
@@ -168,7 +191,6 @@
 
 <section id="submit-review">
     <h2>Leave a Review</h2>
-    <!-- To make this form work, sign up at Formspree.io and paste your custom URL in the 'action' attribute below -->
     <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <select name="rating" required>
@@ -202,8 +224,38 @@
 </section>
 
 <footer>
-    &copy; 2026 Josh's Tatts Studio. All rights reserved.
+    &copy; 2026 Josh's Tatts Studio | Brighton, UK. All rights reserved.
 </footer>
+
+<script>
+    // This script controls the gallery filters
+    function filterSelection(c) {
+        var x, i;
+        x = document.getElementById("portfolio-grid").getElementsByTagName("img");
+        
+        // Update active button styling
+        var btns = document.getElementsByClassName("filter-btn");
+        for (i = 0; i < btns.length; i++) {
+            btns[i].classList.remove("active");
+            if(btns[i].getAttribute("onclick").includes(c)) {
+                btns[i].classList.add("active");
+            }
+        }
+
+        // Show/hide images based on category
+        for (i = 0; i < x.length; i++) {
+            if (c == "all") {
+                x[i].style.display = "block";
+            } else {
+                if (x[i].getAttribute("data-category") == c) {
+                    x[i].style.display = "block";
+                } else {
+                    x[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
 </body>
 </html>
