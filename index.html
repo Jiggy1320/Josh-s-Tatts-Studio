@@ -12,7 +12,7 @@
             --panel: #111111;
             --gray: #999; 
         }
-        body { font-family: 'Inter', sans-serif; background-color: var(--dark); color: #fff; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--dark); color: #fff; margin: 0; padding: 0; padding-bottom: 70px; } /* Added bottom padding for sticky bar */
         
         /* Header & Slideshow */
         header { position: relative; padding: 90px 20px 70px; text-align: center; border-bottom: 1px solid #222; overflow: hidden; z-index: 1; }
@@ -54,6 +54,38 @@
         .btn-outline:hover { background: rgba(203, 163, 88, 0.1); color: var(--gold); }
         .btn-submit { width: 100%; margin-top: 10px; }
         
+        /* Sticky Mobile Action Bar */
+        .sticky-footer-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #222;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            z-index: 999;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sticky-footer-bar p { margin: 0; font-size: 0.85em; color: #fff; font-family: 'Cinzel', serif; letter-spacing: 1px; }
+        .sticky-btn {
+            background: var(--gold);
+            color: #000;
+            padding: 10px 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 2px;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 768px) {
+            .sticky-footer-bar { display: flex; }
+        }
+
         section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; border-bottom: 1px solid #1a1a1a; }
         section:last-child { border-bottom: none; }
         h2 { font-size: 2em; margin-bottom: 40px; text-align: center; color: #fff; border-bottom: 1px solid #333; padding-bottom: 20px; }
@@ -113,6 +145,12 @@
     </style>
 </head>
 <body>
+
+<!-- Sticky Mobile Booking Bar -->
+<div class="sticky-footer-bar">
+    <p>Josh's Tatts &bull; Brighton</p>
+    <a href="#book" class="sticky-btn">Secure Spot</a>
+</div>
 
 <header>
     <div class="slideshow-bg" id="header-bg"></div>
