@@ -95,7 +95,6 @@
     </div>
 
     <div class="gallery" id="portfolio-grid">
-        <!-- Original Images -->
         <img src="IMG_2337.jpeg" alt="Tattoo Idea" data-category="floral">
         <img src="IMG_2341.jpeg" alt="Tattoo Idea" data-category="pet">
         <img src="IMG_2343.jpeg" alt="Tattoo Idea" data-category="movie">
@@ -107,7 +106,6 @@
         <img src="IMG_2415.jpeg" alt="Tattoo Idea" data-category="full-sleeve">
         <img src="IMG_2416.jpeg" alt="Tattoo Idea" data-category="full-sleeve">
         
-        <!-- Cleanly Renamed Images -->
         <img src="Animal1.jpg" alt="Tattoo Idea" data-category="pet">
         <img src="Blackandgrey1.jpg" alt="Tattoo Idea" data-category="black-and-grey">
         <img src="Movie1.jpg" alt="Tattoo Idea" data-category="movie">
@@ -127,7 +125,6 @@
 <section id="reviews">
     <h2>Client Reviews</h2>
     <div class="review-grid" id="review-container">
-        <!-- Visible Reviews -->
         <div class="review">
             <div class="stars">★★★★★</div>
             <p>"Got a piece done to cover up some old blown-out ink. You can't even tell the old piece was there. Strict hygiene protocol and the shading healed perfectly."</p>
@@ -169,7 +166,6 @@
             </div>
         </div>
 
-        <!-- Hidden Reviews -->
         <div class="review hidden">
             <div class="stars">★★★★☆</div>
             <p>"First tattoo. He explained the aftercare properly and didn't rush the process. Minimal scabbing during the healing phase."</p>
@@ -217,7 +213,7 @@
 
 <section id="submit-review">
     <h2>Leave a Review</h2>
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form action="https://formspree.io/f/myeyaaao" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <select name="rating" required>
             <option value="5">★★★★★ (5 Stars)</option>
@@ -254,7 +250,6 @@
 </footer>
 
 <script>
-    // 1. Slideshow Logic for the Header
     const slideImages = [
         "Sleeve1.jpg", 
         "IMG_2337.jpeg", 
@@ -266,16 +261,13 @@
     let currentSlide = 0;
     const headerBg = document.getElementById('header-bg');
     
-    // Set the first image immediately
     headerBg.style.backgroundImage = `url(${slideImages[0]})`;
     
-    // Change image every 4 seconds
     setInterval(() => {
         currentSlide = (currentSlide + 1) % slideImages.length;
         headerBg.style.backgroundImage = `url(${slideImages[currentSlide]})`;
     }, 4000);
 
-    // 2. Load More Reviews Logic
     function showAllReviews() {
         const hiddenReviews = document.querySelectorAll('.review.hidden');
         hiddenReviews.forEach(review => {
@@ -284,7 +276,6 @@
         document.getElementById('load-more-btn').style.display = 'none';
     }
 
-    // 3. Gallery Filter Logic
     function filterSelection(category) {
         let items = document.getElementById("portfolio-grid").getElementsByTagName("img");
         let btns = document.getElementsByClassName("filter-btn");
